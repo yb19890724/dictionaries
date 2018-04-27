@@ -9,5 +9,16 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "App\\": "app/",
+            "Phpno1\\Dictionaries\\":"src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phpno1\\Dictionaries\\Test\\": "tests/"
+        }
+    }
 }
