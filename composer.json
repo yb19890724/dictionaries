@@ -1,0 +1,13 @@
+{
+    "name": "phpno1/dictionary",
+    "description": "laravel data dictionary trans form",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hyb",
+            "email": "354037968@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
