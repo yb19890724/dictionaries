@@ -14,7 +14,10 @@
         "psr-4":{
             "App\\": "app/",
             "Phpno1\\Dictionaries\\":"src/"
-        }
+        },
+        "files": [
+            "src/Helps/Function.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
