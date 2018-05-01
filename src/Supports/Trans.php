@@ -15,7 +15,7 @@ trait Trans
     public function tagTrans(string $fields, string $separator = ',') :string
     {
         if (object_get($this, $fields)) {
-            return implode(",",$this->getValueArray($fields, $separator));
+            return implode(",", $this->getDictionaries($fields, $separator));
         }
         return "";
     }
@@ -27,11 +27,9 @@ trait Trans
      * @param string $separator
      * @return array
      */
-    protected function getValueArray(string $fields, string $separator = ',') :array
+    protected function getDictionaries(string $fields, string $separator = ',') :array
     {
-        $dictionKeys = $this->{$fields};
-        $record = is_array($dictionKeys) ? $dictionKeys : explode($separator, $dictionKeys);
-        return array_only(config('dictionaries.' . $fields), $record);
+        return array_only(config('dictionaries.' . $fields), str_key_array($this, $fields, $separator));
     }
 
     /**
@@ -42,7 +40,7 @@ trait Trans
      */
     public function tagsTrans(string $fields, string $dictionary, string $separator = ',')
     {
-        if(!empty($this->getCollection())){
+        if (!empty($this->getCollection())) {
 
         }
     }
