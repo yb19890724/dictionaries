@@ -4,31 +4,46 @@ namespace Phpno1\Dictionaries\Supports;
 
 trait Trans
 {
-    protected $string;
-    protected $array;
-    protected $collection;
 
     /**
      * find data dictionary trans form.
      *
+     * @param string $fields
+     * @param string $separator
+     * @return string
      */
     public function tagTrans(string $fields, string $separator = ',') :string
     {
-        if ($this->object_key_string($this,$fields)) {
-            $value = array_only(config('dictionaries.' . $fields), explode($separator, $this->{$fields}));
-            return is_array($value) ? implode($separator, $value) : "";
+        if (object_get($this, $fields)) {
+            return implode(",",$this->getValueArray($fields, $separator));
         }
         return "";
     }
 
-
+    /**
+     * get object key value format array
+     *
+     * @param string $fields
+     * @param string $separator
+     * @return array
+     */
+    protected function getValueArray(string $fields, string $separator = ',') :array
+    {
+        $dictionKeys = $this->{$fields};
+        $record = is_array($dictionKeys) ? $dictionKeys : explode($separator, $dictionKeys);
+        return array_only(config('dictionaries.' . $fields), $record);
+    }
 
     /**
      * data all dictionary trans form.
-     *
+     * @param string $fields
+     * @param string $dictionary
+     * @param string $separator
      */
     public function tagsTrans(string $fields, string $dictionary, string $separator = ',')
     {
+        if(!empty($this->getCollection())){
 
+        }
     }
 }
