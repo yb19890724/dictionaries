@@ -15,9 +15,7 @@
             "App\\": "app/",
             "Phpno1\\Dictionaries\\":"src/"
         },
-        "files": [
-            "src/helpers.php"
-        ]
+        "files": ["src/helpers.php"]
     },
     "autoload-dev": {
         "psr-4": {

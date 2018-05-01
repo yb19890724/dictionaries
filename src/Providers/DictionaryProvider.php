@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace Phpno1\Dictionaries\Providers;
 
 use Illuminate\Support\ServiceProvider;
+
 
 class DictionaryProvider extends ServiceProvider
 {
@@ -13,8 +14,7 @@ class DictionaryProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        //include "../helpers.php";
+
     }
 
     /**
