@@ -1,13 +1,14 @@
 <?php
 
-function test(){
-    echo 1;exit;
-}
 
 if (!function_exists("str_key_array")) {
     /**
-     * data key to array
+     * data key value to array
      *
+     * @param $data
+     * @param string $fields
+     * @param string $separator
+     * @return array
      */
     function str_key_array($data, string $fields, string $separator = ',') :array
     {
