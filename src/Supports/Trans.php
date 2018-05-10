@@ -31,7 +31,7 @@ trait Trans
     public function mappingArray(string $fields, string $separator = ',') :array
     {
         if (object_get($this, $fields)) {
-            return $this->getDictionaries($fields, $separator);
+            return $this->getDictionary($fields, $separator);
         }
         return "";
     }
@@ -43,8 +43,77 @@ trait Trans
      * @param string $separator
      * @return array
      */
-    protected function getDictionaries(string $fields, string $separator = ',') :array
+    protected function getDictionary(string $fields, string $separator = ',') :array
     {
         return array_only(config('dictionaries.' . $fields), str_key_array($this, $fields, $separator));
     }
+
+    /**
+     *
+     * @param array $fields
+     * @param string $separator
+     */
+    private function getDictionaries(array $fields, string $separator = ',', string $format = 'string')
+    {
+        $dictionaries = array_only(config('dictionaries'), $fields);
+        if (!empty($dictionary)) {
+            foreach ($fields as $item) {
+                $dictionary = array_only($dictionaries[$item], str_key_array($this, $item, $separator));
+                $this->{$item . '_label'} = $this->dictionaryFormat($dictionary, $format);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * set label title
+     * @param string $label
+     * @return bool|string
+     */
+    public function setLabel($label = "title")
+    {
+        return !empty($label)??"title";
+    }
+
+    /**
+     * dictionary format
+     * @param array $params
+     * @param string $separator
+     * @param string $format
+     * @return array|string
+     */
+    private function dictionaryFormat(array $params, string $format)
+    {
+        if ($format == "string") {
+            return implode(",", $this->getDictionaries($params, $separator));
+        }
+        return $params;
+    }
+
+
+    /**
+     * @param array $fields
+     * @param array $separator
+     */
+    public function mappings(array $fields, string $separator = ',')
+    {
+        if (array_only($this->toArray(), $fields)) {
+            $this->getDictionaries($fields, $separator, 'string');
+        }
+        return $this;
+    }
+
+    /**
+     * @param array $fields
+     * @param string $separator
+     * @return $this
+     */
+    public function mappingsArray(array $fields, string $separator = ',')
+    {
+        if (array_only($this->toArray(), $fields)) {
+            $this->getDictionaries($fields, $separator, 'array');
+        }
+        return $this;
+    }
+
 }
