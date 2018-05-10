@@ -4,7 +4,6 @@ namespace Phpno1\Dictionaries\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-
 class DictionaryProvider extends ServiceProvider
 {
     /**
@@ -14,7 +13,11 @@ class DictionaryProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/../Config/dictionaries.php' => config_path('dictionary.php')
+        ]);
 
+        $this->mergeConfigFrom(__DIR__ . '/../Config/dictionaries.php', 'dictionary');
     }
 
     /**

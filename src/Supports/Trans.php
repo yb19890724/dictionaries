@@ -59,7 +59,7 @@ trait Trans
         if (!empty($dictionary)) {
             foreach ($fields as $item) {
                 $dictionary = array_only($dictionaries[$item], str_key_array($this, $item, $separator));
-                $this->{$item . '_label'} = $this->dictionaryFormat($dictionary, $format);
+                $this->{$item . $this->setLabel()} = $this->dictionaryFormat($dictionary, $format);
             }
         }
         return $this;
@@ -70,9 +70,9 @@ trait Trans
      * @param string $label
      * @return bool|string
      */
-    public function setLabel($label = "title")
+    private function setLabel() :string
     {
-        return !empty($label)??"title";
+        return !config('dictionary.label');
     }
 
     /**
@@ -85,7 +85,7 @@ trait Trans
     private function dictionaryFormat(array $params, string $format)
     {
         if ($format == "string") {
-            return implode(",", $this->getDictionaries($params, $separator));
+            return implode(",", $params);
         }
         return $params;
     }
