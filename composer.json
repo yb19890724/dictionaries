@@ -24,5 +24,12 @@
         "psr-4": {
             "Phpno1\\Dictionaries\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Phpno1\\Architecture\\Providers\\ArchitectureServiceProvider"
+            ]
+        }
     }
 }
