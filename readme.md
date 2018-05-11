@@ -1,7 +1,19 @@
 ## Laravel Dictionary Extends
 
+- <a href="#安装">安装</a>
+    - <a href="#使用要求">使用要求</a>
+    - <a href="#composer">composer</a>
+    - <a href="#laravel">laravel</a>
+- <a href="#配置">配置</a>    
+    - <a href="#模型定义">模型定义</a>    
+    - <a href="#设置字典">设置字典</a>    
+- <a href="#方法">方法</a>
+- <a href="#数据转化">数据转化</a>
+    - <a href="#单个字段字典映射">单个字段字典映射</a>
+    - <a href="#多个字段字典映射">多个字段字典映射</a>
+- <a href="#注意事项">注意事项</a>
 
-### 快速使用
+### 配置 
 
 #### 模型定义
 
@@ -20,12 +32,15 @@ class Goods extends Model
 
 ```
 
-#### 配置映射字典
+#### 设置字典
 
 ```
 //config/dictionaries.php
 
 return [
+
+    'label'=>'label'//这里是多字段映射用到的
+    
     'tags'=>[
         '1'=>'进口食品',
         '2'=>'奶制品',
@@ -38,10 +53,53 @@ return [
     
 ```
 
+### 方法 
+
+### mapping
+``` 
+    /**
+     * @param string $fields
+     * @param string $separator 默认值 ,分割方式
+     * @return string
+     */
+    mapping('字段',"分割方式='默认是 , '");
+```
+
+
+### mappingArray
+
+```
+    /**
+     * @param string $fields
+     * @param string $separator 默认值 ,分割方式
+     * @return array
+     */
+    mappings('字段',"分割方式='默认是 , '");
+```
+
+### mappings
+```
+    /**
+     * @param array $fields
+     * @param string $separator 默认值 ,分割方式
+     * @return $this
+     */
+    mappings('字段',"分割方式='默认是 , '");
+```
+
+### mappingsArray
+```
+    /**
+     * @param array $fields
+     * @param string $separator 默认值 ,分割方式
+     * @return $this
+     */
+    mappingsArray('字段',"分割方式='默认是 , '");
+```
 
 ### 数据转化
 
-#### 单条数据转化
+#### 单个字段字典映射
 
 ```
     //单条数据转化 
@@ -94,20 +152,46 @@ return [
 
 ```
     Route::get('/', function () {
-        $result=(new \App\Goods)->first();
-        $result->tags_title=$result->tagTrans('tags');
-        $result->recommend_title=$result->tagTrans('recommend');
-        dd($result);
+        $result=(new \App\Goods)->all();
+        $result->transform(function($goods){
+            $goods->tags_title=$goods->mapping('tags');
+            $goods->recommend_title=$goods->mapping('recommend');
+            return $goods;
+        });
+        dd($result->toArray());
     });
 ```
 
 #### 分页数据转化
 
 ```
+    $result=(new \App\Goods)->paginate();
+        $result->getCollection()->transform(function($goods){
+        $goods->tags_title=$goods->mapping('tags');
+        $goods->recommend_title=$goods->mapping('recommend');
+        return $goods;
+    });
+    dd($result->toArray());
+```
+
+#### 多个字段字典映射
+
+```
     Route::get('/', function () {
         $result=(new \App\Goods)->first();
-        $result->tags_title=$result->tagTrans('tags');
-        $result->recommend_title=$result->tagTrans('recommend');
-        dd($result);
+        
+        //转化  返回字符串
+        $result=$result->mappings(['tags','recommend']);
+        dd($result->toArray());
+        
+        //转化  返回数组
+        $result=$result->mappingsArray(['tags','recommend']);
+        dd($result->toArray());
     });
 ```
+
+#### 注意事项
+
++ 复杂数据映射请用单子段转化。
++ 数据映射字段和字典key要一致否则无法转化。
++ 字典配置文件label如果是空,转化原始字段则数据被覆盖。
