@@ -2,8 +2,11 @@
 
 namespace Phpno1\Dictionaries\Supports;
 
+/**
+ * data dictionary mapping
+ */
 
-trait Trans
+trait Mapping
 {
 
     /**
@@ -33,7 +36,7 @@ trait Trans
         if (object_get($this, $fields)) {
             return $this->getDictionary($fields, $separator);
         }
-        return "";
+        return [];
     }
 
     /**
@@ -59,7 +62,7 @@ trait Trans
         if (!empty($dictionaries)) {
             foreach ($fields as $item) {
                 $dictionary = array_only($dictionaries[$item], str_key_array($this, $item, $separator));
-                $this->{$item .'_'. $this->setLabel()} = $this->dictionaryFormat($dictionary, $format);
+                $this->{$item . '_' . $this->setLabel()} = $this->dictionaryFormat($dictionary, $format);
             }
         }
         return $this;
@@ -72,7 +75,7 @@ trait Trans
      */
     private function setLabel() :string
     {
-        return config('dictionaries.label');
+        return config('dictionaries.label.limit');
     }
 
     /**
@@ -92,6 +95,8 @@ trait Trans
 
 
     /**
+     * data key value mapping dictionary to string.
+     *
      * @param array $fields
      * @param array $separator
      */
@@ -104,6 +109,8 @@ trait Trans
     }
 
     /**
+     * data key value mapping dictionary to array.
+     *
      * @param array $fields
      * @param string $separator
      * @return $this

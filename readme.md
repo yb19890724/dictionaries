@@ -48,11 +48,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Phpno1\Dictionaries\Supports\Trans;
+use Phpno1\Dictionaries\Supports\Mapping;
 
 class Goods extends Model
 {
-    use Trans;//引入trait
+    use Mapping;//引入trait
 }
 
 ```
