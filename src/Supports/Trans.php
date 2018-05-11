@@ -16,7 +16,7 @@ trait Trans
     public function mapping(string $fields, string $separator = ',') :string
     {
         if (object_get($this, $fields)) {
-            return implode(",", $this->getDictionaries($fields, $separator));
+            return implode(",", $this->getDictionary($fields, $separator));
         }
         return "";
     }
@@ -56,10 +56,10 @@ trait Trans
     private function getDictionaries(array $fields, string $separator = ',', string $format = 'string')
     {
         $dictionaries = array_only(config('dictionaries'), $fields);
-        if (!empty($dictionary)) {
+        if (!empty($dictionaries)) {
             foreach ($fields as $item) {
                 $dictionary = array_only($dictionaries[$item], str_key_array($this, $item, $separator));
-                $this->{$item . $this->setLabel()} = $this->dictionaryFormat($dictionary, $format);
+                $this->{$item .'_'. $this->setLabel()} = $this->dictionaryFormat($dictionary, $format);
             }
         }
         return $this;
@@ -72,7 +72,7 @@ trait Trans
      */
     private function setLabel() :string
     {
-        return !config('dictionary.label');
+        return config('dictionaries.label');
     }
 
     /**
