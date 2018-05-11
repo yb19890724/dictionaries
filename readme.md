@@ -1,4 +1,10 @@
-## Laravel Dictionary Extends
+## Laravel 数据字典扩展包
+
+### 功能
+<p>数据映射字典转化。</p>
+
+### 官方扩展qq群
+    qq:680531281
 
 - <a href="#安装">安装</a>
     - <a href="#使用要求">使用要求</a>
@@ -12,6 +18,25 @@
     - <a href="#单个字段字典映射">单个字段字典映射</a>
     - <a href="#多个字段字典映射">多个字段字典映射</a>
 - <a href="#注意事项">注意事项</a>
+
+### 使用要求
+
+- laravel >= 5.*    
+- php     >= 7
+
+### composer
+执行以下命令获取包的最新版本:
+
+```php
+    composer require phpno1/dictionary
+```
+
+### laravel
+
+#### 生成配置文件
+```php
+    php artisan vendor:publish --provider "Phpno1\Dictionaries\Providers\DictionaryProvider"
+```
 
 ### 配置 
 
