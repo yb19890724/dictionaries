@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~6.0",
+        "laravel/framework": "5.5.*"
     },
     "autoload":{
         "psr-4":{
@@ -21,7 +22,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Phpno1\\Dictionaries\\Test\\": "tests/"
+            "Phpno1\\Dictionaries\\Tests\\": "tests/"
         }
     }
 }
