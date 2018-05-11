@@ -67,15 +67,15 @@ trait Mapping
         }
         return $this;
     }
-
+    
     /**
      * set label title
-     * @param string $label
-     * @return bool|string
+     *
+     * @return string
      */
     private function setLabel() :string
     {
-        return config('dictionaries.label.limit');
+        return config('dictionaries.label');
     }
 
     /**
