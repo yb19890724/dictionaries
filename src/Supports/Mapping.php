@@ -52,6 +52,7 @@ trait Mapping
     }
 
     /**
+     * get dictionaries mpping
      *
      * @param array $fields
      * @param string $separator
