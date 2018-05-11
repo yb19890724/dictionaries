@@ -28,7 +28,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Phpno1\\Architecture\\Providers\\DictionaryProvider"
+                "Phpno1\\Dictionaries\\Providers\\DictionaryProvider"
             ]
         }
     }
