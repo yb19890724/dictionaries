@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 class DictionaryProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Dictionary any application services.
      *
      * @return void
      */
