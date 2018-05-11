@@ -14,10 +14,10 @@ class DictionaryProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../Config/dictionaries.php' => config_path('dictionary.php')
+            __DIR__ . '/../Config/dictionaries.php' => config_path('dictionaries.php')
         ]);
 
-        $this->mergeConfigFrom(__DIR__ . '/../Config/dictionaries.php', 'dictionary');
+        $this->mergeConfigFrom(__DIR__ . '/../Config/dictionaries.php', 'dictionaries');
     }
 
     /**
