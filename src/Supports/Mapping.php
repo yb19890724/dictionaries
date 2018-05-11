@@ -67,7 +67,7 @@ trait Mapping
         }
         return $this;
     }
-    
+
     /**
      * set label title
      *
