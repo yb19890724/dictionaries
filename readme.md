@@ -38,6 +38,14 @@
     php artisan vendor:publish --provider "Phpno1\Dictionaries\Providers\DictionaryProvider"
 ```
 
+#### > = laravel5.5
+ServiceProvider将自动附加
+
+#### 其他版本
+'providers' => [
+    Phpno1\Dictionaries\Providers\DictionaryProvider::class,
+],
+
 ### 配置 
 
 #### 模型定义
