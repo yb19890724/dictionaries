@@ -42,15 +42,17 @@
 ServiceProvider将自动附加
 
 #### 其他版本
+```php
 'providers' => [
     Phpno1\Dictionaries\Providers\DictionaryProvider::class,
-],
-
+]
+```
 ### 配置 
 
 #### 模型定义
 
-```
+```php
+
 <?php
 
 namespace App;
@@ -67,7 +69,7 @@ class Goods extends Model
 
 #### 设置字典
 
-```
+```php
 //config/dictionaries.php
 
 return [
@@ -89,7 +91,7 @@ return [
 ### 方法 
 
 ### mapping
-``` 
+```php 
     /**
      * @param string $fields
      * @param string $separator 默认值 ,分割方式
@@ -101,7 +103,7 @@ return [
 
 ### mappingArray
 
-```
+```php
     /**
      * @param string $fields
      * @param string $separator 默认值 ,分割方式
@@ -111,7 +113,7 @@ return [
 ```
 
 ### mappings
-```
+```php
     /**
      * @param array $fields
      * @param string $separator 默认值 ,分割方式
@@ -121,7 +123,7 @@ return [
 ```
 
 ### mappingsArray
-```
+```php
     /**
      * @param array $fields
      * @param string $separator 默认值 ,分割方式
@@ -134,7 +136,7 @@ return [
 
 #### 单个字段字典映射
 
-```
+```php
     //单条数据转化 
     Route::get('/', function () {
         $result=(new \App\Goods)->first();
@@ -183,7 +185,7 @@ return [
 
 #### 集合数据转化
 
-```
+```php
     Route::get('/', function () {
         $result=(new \App\Goods)->all();
         $result->transform(function($goods){
@@ -197,7 +199,7 @@ return [
 
 #### 分页数据转化
 
-```
+```php
     $result=(new \App\Goods)->paginate();
         $result->getCollection()->transform(function($goods){
         $goods->tags_title=$goods->mapping('tags');
@@ -209,7 +211,7 @@ return [
 
 #### 多个字段字典映射
 
-```
+```php
     Route::get('/', function () {
         $result=(new \App\Goods)->first();
         
